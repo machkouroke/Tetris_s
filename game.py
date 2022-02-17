@@ -44,12 +44,13 @@ class Grid:
         self.plan = [['-' for _ in range(w)] for _ in range(h)]
         # Table that keeps the state of the grid when adding a new point
         self.actual = [['-' for _ in range(w)] for _ in range(h)]
-        self.piece = [Piece(c, {x: coordinate(y, self.form) for x, y in Grid.ch.items()}[c][0], w, h)]
+        self.piece = [Piece(c.upper(), {x: coordinate(y, self.form) for x, y in Grid.ch.items()}[c.upper()][0], w, h)]
         self.plan_actualise()
 
     def add_piece(self, n: 'Name of piece'):
         self.actual = self.plan
-        self.piece.append(Piece(n, {x: coordinate(y, self.form) for x, y in Grid.ch.items()}[n][0], self.w, self.h))
+        self.piece.append(Piece(n.upper(), {x: coordinate(y, self.form) for x, y in Grid.ch.items()}[n.upper()][0],
+                                self.w, self.h))
         self.plan_actualise()
 
     def plan_actualise(self):
@@ -148,10 +149,18 @@ def main():
     game = Grid(w, h, piece)
     print(game.maps + '\n')
     # input command
-    choice = input()
+    print("""
+    Instruction:
+    piece: Mettre une nouvelle piece en jeu
+    rotate: pivoter la piece à -90 degré
+    down: descendre d'un niveau
+    right: avancer à droite tout en descendant d'un niveau
+    left: avancer à gauche tout en descendant d'un niveau
+    """)
+    choice = input("Quelle action vouliez vous effectuer: ")
     while choice != 'exit':
         if choice == 'piece':
-            game.add_piece(input())
+            game.add_piece(input("Veuillez choisir une pieces: "))
             print(game.maps + '\n')
         elif choice == 'break':
             game.break_line()
@@ -164,7 +173,7 @@ def main():
                 # Game over
                 break
 
-        choice = input()
+        choice = input("Quelle action vouliez vous effectuer: ")
 
 
 if __name__ == '__main__':
