@@ -3,6 +3,12 @@ import copy as cp
 
 
 def hyphen(w, h):
+    """
+    Create a grid of width w and height h and fill it with hyphen
+    :param w: width of grid
+    :param h: height of grid
+    :return: the filled grid.
+    """
     return '\n'.join(' '.join('-' for _ in range(w)) for _ in range(h))
 
 
@@ -135,11 +141,10 @@ class Piece:
 
 def main():
     # Dimension
-    w, h = [int(x) for x in input().split()]
+    w, h = [int(x) for x in input("Veuillez saisir les dimensions de la grilles: ").split()]
     print(hyphen(w, h) + '\n')
     # first command and piece
-    input()
-    piece = input()
+    piece = input("Veuillez saisir votre premiere piece pour initialiser la grille: ")
     game = Grid(w, h, piece)
     print(game.maps + '\n')
     # input command
