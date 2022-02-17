@@ -34,7 +34,7 @@ class Grid:
         self.w = w
         self.h = h
         # An array with number of each point in grid
-        self.form = np.array([[y for y in range(x, x + w)] for x in range(0, w * h, w)])
+        self.form = np.array([list(range(x, x + w)) for x in range(0, w * h, w)])
         self.plan = [['-' for _ in range(w)] for _ in range(h)]
         # Table that keeps the state of the grid when adding a new point
         self.actual = [['-' for _ in range(w)] for _ in range(h)]
